@@ -2,28 +2,18 @@
 //
 
 #include <stdio.h>
-#include "List.h"
+#include "AVLTree.h"
 
 int main()
 {
-    List* list = ListCreate();
+    AVLTree* tree = CreateAVLTree();
+    int a[] = {10, 20, 30, 40, 50};
 
-    int a[] = {24, 13, 53, 37, 90, 48};
+    for (int i = 0; i < 5; i++)
+    {
+        tree->root = Insert(tree->root, &a[i]);
+    }
     
-    for (int i =0; i < 6; i++)
-    {
-        ListAdd(list, &a[i]);
-    }
-
-    ListNode* node =
-
-    ListIter* listIter = ListIterator(list);
-
-    while (ListIterHasNext(listIter))
-    {
-        ListNode* node = ListNext(listIter);
-        int* value = (int*)node->value;
-        printf("%d\t", *value);
-    }
+    List* list = LevelOrderTraverse(tree->root);
 }
 

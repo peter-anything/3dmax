@@ -1,4 +1,5 @@
 #include "AVLTree.h"
+#include "Queue.h"
 #include <malloc.h>
 #include <stdio.h>
 
@@ -49,7 +50,7 @@ AVLTreeNode* LRRotate(AVLTreeNode* root)
     return LLRotate(root);
 }
 
-AVLTreeNode* Insert(AVLTreeNode* root, AVLTreeElementType data)
+AVLTreeNode* Insert(AVLTreeNode* root, void * data)
 {
     AVLTreeNode* newData = (AVLTreeNode*)malloc(sizeof(AVLTreeNode));
 
@@ -118,7 +119,26 @@ AVLTreeNode* Insert(AVLTreeNode* root, AVLTreeElementType data)
     return root;
 }
 
-void LevelOrderTraverse(AVLTreeNode* root)
+List* LevelOrderTraverse(AVLTreeNode* root)
 {
+    Queue* queue = QueueCreate();
+    List* list = ListCreate();
+    QueueEn(queue, root);
+    while (!QueueIsEmpty(queue))
+    {
+        AVLTreeNode* cur = (AVLTreeNode*) QueueDe(queue);
+        ListAdd(list, cur->data);
 
+        if (root->left)
+        {
+            QueueEn(queue, root->left);
+        }
+        
+        if (root->right)
+        {
+            QueueEn(queue, root->right);
+        }
+    }
+
+    return list;
 }
