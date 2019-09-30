@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include "AVLTree.h"
 
+#include "Queue.h"
+#include "List.h"
+
 int main()
 {
     AVLTree* tree = CreateAVLTree();
@@ -15,5 +18,14 @@ int main()
     }
     
     List* list = LevelOrderTraverse(tree->root);
+    
+    ListIter *listIter = ListIterator(list);
+    while (ListIterHasNext(listIter))
+    {
+        int value = *((int*)ListNext(listIter)->value);
+        printf("%d\t", value);
+    }
+
+
 }
 

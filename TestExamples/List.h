@@ -16,6 +16,7 @@ typedef struct List {
 
 typedef struct ListIter {
     ListNode* next;
+    unsigned long len;
 } ListIter;
 
 bool ListIsEmpty(List* list);

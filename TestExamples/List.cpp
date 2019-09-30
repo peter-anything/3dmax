@@ -78,6 +78,7 @@ ListNode* ListLastDelete(List* list)
     ListNode* last = ListLast(list);
     list->tail = last->prev;
     list->tail->next = list->head;
+    list->head->next = list->tail;
     last->next = NULL;
     last->prev = NULL;
     list->len--;
@@ -98,6 +99,7 @@ ListIter* ListIterator(List* list)
     }
 
     listIter->next = list->head;
+    listIter->len = list->len;
 
     return listIter;
 }
@@ -105,16 +107,17 @@ ListIter* ListIterator(List* list)
 ListNode* ListNext(ListIter* listIter)
 {
     ListNode* cur = listIter->next;
-    if (cur != NULL)
+    if (listIter->len != 0)
     {
         listIter->next = cur->next;
+        listIter->len--;
     }
 
     return cur;
 }
 
 bool ListIterHasNext(ListIter* listIter) {
-    return listIter->next != NULL;
+    return listIter->len != 0;
 }
 
 void ListClear(List* list)
@@ -150,13 +153,15 @@ ListNode* ListFirstDelete(List* list)
     else if (list->len == 1)
     {
         ListNode* p = list->head;
-        list->head = NULL;
+        list->head = list->tail = NULL;
         list->len--;
+        p->prev = p->next = NULL;
         return p;
     }
     ListNode* first = ListFirst(list);
     list->head = first->next;
     list->tail->next = list->head;
+    list->head->prev = list->tail;
     first->next = NULL;
     first->prev = NULL;
     list->len--;

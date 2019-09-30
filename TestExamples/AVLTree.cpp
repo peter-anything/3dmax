@@ -129,14 +129,14 @@ List* LevelOrderTraverse(AVLTreeNode* root)
         AVLTreeNode* cur = (AVLTreeNode*) QueueDe(queue);
         ListAdd(list, cur->data);
 
-        if (root->left)
+        if (cur->left)
         {
-            QueueEn(queue, root->left);
+            QueueEn(queue, cur->left);
         }
         
-        if (root->right)
+        if (cur->right)
         {
-            QueueEn(queue, root->right);
+            QueueEn(queue, cur->right);
         }
     }
 
