@@ -50,7 +50,7 @@ AVLTreeNode* LRRotate(AVLTreeNode* root)
     return LLRotate(root);
 }
 
-AVLTreeNode* Insert(AVLTreeNode* root, void * data)
+AVLTreeNode* Insert(AVLTreeNode* root, void * data, int (*compare)(void* data1, void* data2))
 {
     AVLTreeNode* newData = (AVLTreeNode*)malloc(sizeof(AVLTreeNode));
 
@@ -70,15 +70,15 @@ AVLTreeNode* Insert(AVLTreeNode* root, void * data)
     }
     else
     {
-        if (data > root->data)
+        if (compare(data, root->data) == 1)
         {
             isRightInsert = true;
-            root->right = Insert(root->right, data);
+            root->right = Insert(root->right, data, compare);
         }
         else
         {
             isLeftInsert = true;
-            root->left = Insert(root->left, data);
+            root->left = Insert(root->left, data, compare);
         }
     }
 
@@ -88,7 +88,7 @@ AVLTreeNode* Insert(AVLTreeNode* root, void * data)
         // RR
         if (isRightInsert && root->right != NULL)
         {
-            if (data > root->right->data)
+            if (compare(data, root->right->data) == 1)
             {
                 root = RRoate(root);
             }
@@ -104,7 +104,7 @@ AVLTreeNode* Insert(AVLTreeNode* root, void * data)
         // RR
         if (isLeftInsert && root->left != NULL)
         {
-            if (data < root->left->data)
+            if (compare(data, root->left->data) == 0)
             {
                 root = LLRotate(root);
             }

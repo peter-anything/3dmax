@@ -2,30 +2,36 @@
 //
 
 #include <stdio.h>
-#include "AVLTree.h"
+#include "BTree.h"
 
-#include "Queue.h"
-#include "List.h"
+int compare(void * x, void* y)
+{
+    int* p1 = (int*)x;
+    int* p2 = (int*)y;
+    return *p1 > *p2;
+}
 
 int main()
 {
-    AVLTree* tree = CreateAVLTree();
-    int a[] = {10, 20, 30, 40, 50};
+    BTree* tree = BTreeCreate();
+    int a[] = {10, 30, 50, 70, 90, 100, 110, 91, 92};
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 8; i++)
     {
-        tree->root = Insert(tree->root, &a[i]);
+        tree->root = BTreeInsert(tree->root, &a[i], &compare);
     }
-    
-    List* list = LevelOrderTraverse(tree->root);
-    
-    ListIter *listIter = ListIterator(list);
+    tree->root = BTreeInsert(tree->root, &a[8], &compare);
+    List* list = BTreeLevelOrderTraverse(tree->root);
+
+    ListIter* listIter = ListIterator(list);
     while (ListIterHasNext(listIter))
     {
-        int value = *((int*)ListNext(listIter)->value);
-        printf("%d\t", value);
+        BTreeNode* node = (BTreeNode*)ListNext(listIter)->value;
+        for (int i = 0; i < node->keyNum; i++)
+        {
+            int* val = (int*)node->keys[i];
+            printf("%d\t", *val);
+        }
     }
-
-
 }
 
