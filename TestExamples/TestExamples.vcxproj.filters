@@ -27,28 +27,49 @@
     <ClInclude Include="BTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="AVLTree.h">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="AVLTree.cpp">
+    <ClCompile Include="Main.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Stack.cpp">
+    <ClCompile Include="Object.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="List.cpp">
+    <ClCompile Include="Queue.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Queue.cpp">
+    <ClCompile Include="Stack.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="BTree.cpp">
+    <ClCompile Include="List.c">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BTree.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AVLTree.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrayList.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Array.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Types.h">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -140,7 +140,7 @@ void ListClear(List* list)
 void ListDestroy(List* list)
 {
     ListClear(list);
-    delete list;
+    free(list);
     list = NULL;
 }
 
