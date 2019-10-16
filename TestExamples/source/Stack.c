@@ -12,7 +12,8 @@ Stack* StackCreate()
         return NULL;
     }
 
-    sList->base = (Object *)malloc(sizeof(Object) * STACK_MAX_SIZE);
+    Object* obj;
+    sList->base = (Object**)malloc(sizeof(obj) * STACK_MAX_SIZE);
     sList->maxSize = STACK_MAX_SIZE;
     sList->size = 0;
     sList->top = sList->bottom = 0;
@@ -21,7 +22,7 @@ Stack* StackCreate()
 
 }
 
-void PushStack(Stack* stack, Object data)
+void PushStack(Stack* stack, Object* data)
 {
     stack->base[stack->top++] = data;
     stack->size++;
@@ -39,7 +40,7 @@ bool IsFullStack(Stack* stack)
     return stack->size == stack->maxSize;
 }
 
-Object GetTopStack(Stack* stack)
+Object* GetTopStack(Stack* stack)
 {
     return stack->base[stack->top];
 }
@@ -51,9 +52,9 @@ void PopStack(Stack* stack, Object* data)
         printf("Empty Stack");
         return;
     }
-    Object top = stack->base[stack->top - 1];
+    Object* top = stack->base[stack->top - 1];
     stack->top--;
     stack->size--;
 
-    *data = top;
+    *data = *top;
 }

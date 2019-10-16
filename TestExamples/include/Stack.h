@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 typedef struct Stack {
-    Object* base;
+    Object** base;
     int top;
     int bottom;
     int maxSize;
@@ -16,11 +16,11 @@ typedef struct Stack {
 
 Stack* StackCreate();
 
-void PushStack(Stack* stack, Object obj);
+void PushStack(Stack* stack, Object *obj);
 
 bool IsEmptyStack(Stack* stack);
 
-Object GetTopStack(Stack* stack);
+Object* GetTopStack(Stack* stack);
 
 void PopStack(Stack* stack, Object *data);
 #endif

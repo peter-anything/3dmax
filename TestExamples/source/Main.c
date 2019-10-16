@@ -1,6 +1,3 @@
-// Tree.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
 #include <stdio.h>
 #include "BTree.h"
 #include "Object.h"
@@ -14,12 +11,21 @@ int compare(void * x, void* y)
     return *p1 > *p2;
 }
 
-int main()
-{
 
-    Stack* stack = StackCreate();
-    ArrayList *list = ArrayListCreate();
+void TestArrayList()
+{
     int a[] = { 10, 30, 50, 70, 90, 100, 110, 91, 92 };
+    ArrayList* list = ArrayListCreate();
+    Object** objArr = ConvertObjectFromIntArr(a, 9);
+    for (int i = 0; i < 9; i++)
+    {
+        Object* obj = objArr[i];
+        if (obj->dataType == TYPE_INT)
+        {
+            printf("%d\t", *((int*)obj->value));
+        }
+    }
+    printf("\n");
     for (int i = 0; i < 9; i++)
     {
         ArrayListAdd(list, &a[i], TYPE_INT);
@@ -27,20 +33,18 @@ int main()
     ArrayListSort(list);
     for (int i = 0; i < 9; i++)
     {
-        Object *obj = ArrayListGetAt(list, i);
+        Object* obj = ArrayListGetAt(list, i);
         if (obj->dataType == TYPE_INT)
         {
-            printf("%d\t", *((int *)obj->value));
+            printf("%d\t", *((int*)obj->value));
         }
     }
+}
+
+void TestBTree()
+{
     /*BTree* tree = BTreeCreate();
-    int a[] = {10, 30, 50, 70, 90, 100, 110, 91, 92};
-    QuickSort(a, 0, 8);
-    for (int i = 0; i < 9; i++)
-    {
-        printf("%d\t", a[i]);
-    }*/
-    /*for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
         tree->root = BTreeInsert(tree->root, &a[i], &compare);
     }
@@ -57,5 +61,29 @@ int main()
             printf("%d\t", *val);
         }
     }*/
+}
+
+void TestStack()
+{
+    Stack* stack = StackCreate();
+    int a[] = { 10, 30, 50, 70, 90, 100, 110, 91, 92 };
+    for (int i = 0; i < 9; i++)
+    {
+        Object* obj = ConvertObjectFromInt(&a[i]);
+        PushStack(stack, obj);
+    }
+
+    Object tmp;
+    for (int i = 0; i < 9; i++)
+    {
+        PopStack(stack, &tmp);
+        printf("%d\t", ObjectIntValue(&tmp));
+    }
+}
+
+int main()
+{
+    TestArrayList();
+
 }
 

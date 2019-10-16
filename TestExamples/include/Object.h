@@ -15,7 +15,8 @@ typedef struct Object
 
 Object* ObjectCreate(void* val, enum DATA_TYPE type);
 Object* ConvertObjectFromInt(int* val);
-Object* ConvertObjectFromIntArr(int[]);
+Object* ConvertObjectFromInt(int *);
+Object** ConvertObjectFromIntArr(int arr[], int length);
 
 int ObjectIntValue(Object*);
 #endif

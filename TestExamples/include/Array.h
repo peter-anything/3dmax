@@ -4,5 +4,6 @@
 
 void ArrayQuickSort(Object* [], int, int);
 int ArrayPartition(Object* [], int low, int high);
+void ArrayQuickSortNonRecursive(Object* [], int, int);
 
 #endif
