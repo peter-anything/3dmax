@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <CString.h>
 #include "BTree.h"
 #include "Object.h"
 #include "ArrayList.h"
@@ -81,9 +82,17 @@ void TestStack()
     }
 }
 
+void TestCString()
+{
+    char *p = "  hh5hello, world";
+    char *q = "hello";
+    ;
+    printf("%d", CStringViolentMatch(p, q));
+}
+
 int main()
 {
-    TestArrayList();
+    TestCString();
 
 }
 
