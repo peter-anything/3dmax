@@ -4,6 +4,11 @@
 #include "Object.h"
 #include "ArrayList.h"
 #include "Stack.h"
+#include <sys/time.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "Printf.h"
+#include "Array.h"
 
 int compare(void * x, void* y)
 {
@@ -84,15 +89,29 @@ void TestStack()
 
 void TestCString()
 {
-    char *p = "  hh5hello, world";
-    char *q = "hello";
-    ;
-    printf("%d", CStringViolentMatch(p, q));
+    char *p = "  hello, world";
+    char *q = "ababaaababaa";
+
+    struct timeval start, end;
+
+    gettimeofday(&start, NULL);
+    printf("%d\n", CStringKMPMatch(p, q));
+    gettimeofday(&end, NULL);
+    long duration;
+    duration = (end.tv_usec - start.tv_usec);
+    printf( "%ld seconds/n", duration );
+    gettimeofday(&start, NULL);
+    printf("%d\n", CStringViolentMatch(p, q));
+    gettimeofday(&end, NULL);
+    duration = (end.tv_usec - start.tv_usec) ;
+    printf("====\n");
+    printf( "%ld seconds/n", duration );
 }
 
 int main()
 {
-    TestCString();
-
+    int a[] = { 10, 30, 50, 70, 90, 100, 110, 91, 92 };
+    HeapSort(a, 9);
+    PrintArray(a, 9);
 }
 

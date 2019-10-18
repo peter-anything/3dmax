@@ -35,5 +35,5 @@ Object* ArrayListGetAt(ArrayList* list, int index)
 
 void ArrayListSort(ArrayList* list)
 {
-    ArrayQuickSortNonRecursive(list->arr, 0, list->size - 1);
+    ArraySelectSort(list->arr, list->size);
 }

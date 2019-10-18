@@ -12,4 +12,4 @@ int CStringKMPMatch(char*, char*);
 bool IsCStringEmpty(char *);
 int CStringLength(char *);
 
-#endif __CSTRING_H__
+#endif

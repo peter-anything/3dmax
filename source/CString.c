@@ -19,18 +19,20 @@ int CStringViolentMatch(char* source, char* dest) {
 
     while (*p != '\0') {
         if (*p == *q) {
-            q ++;
-            destSearchLength ++;
+            q++;
+            destSearchLength++;
         } else {
             if (destSearchLength > 0)
             {
                 q = dest;
                 p = p - destSearchLength + 1;
+                index = index - destSearchLength + 1;
+                destSearchLength = 0;
             }
 
         }
-        p ++;
-        index ++;
+        p++;
+        index++;
         if (*q == '\0')
         {
             return (index - destLen);
@@ -49,13 +51,52 @@ int CStringLength(char * p)
     int len = 0;
     while(*p != '\0')
     {
-        p ++;
-        len ++;
+        p++;
+        len++;
     }
     return len;
 }
 
-int CStringKMPMatch(char* source, char* dest)
-{
+int CStringKMPMatch(char* source, char* dest) {
+    // hello
+    int len = CStringLength(dest);
+    if (len < 3) {
+        return CStringViolentMatch(source, dest);
+    }
+    int next[len];
+    next[0] = 0;
 
+    for (int i = 1; i < len; i++) {
+        int j = next[i - 1];
+        while (j > 0 && dest[i] != dest[j]) {
+            j = next[j - 1];
+        }
+
+        if (dest[i] == dest[j]) {
+            j++;
+        }
+        next[i] = j;
+    }
+    int index = 0;
+    char *p = source;
+    char *q = dest;
+    int destSearchLength = 0;
+    while (*p != '\0') {
+        if (*p == *q || destSearchLength == 0) {
+            q++;
+            p++;
+            destSearchLength++;
+            index++;
+        } else {
+            q = dest + next[destSearchLength];
+            destSearchLength = next[destSearchLength];
+        }
+
+        if (*q == '\0')
+        {
+            return (index - len);
+        }
+    }
+
+    return -1;
 }

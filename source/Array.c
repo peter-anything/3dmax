@@ -1,5 +1,7 @@
 #include "Array.h"
 #include "Stack.h"
+#include "Tool.h"
+#include "Printf.h"
 
 void ArrayQuickSort(Object* arr[], int low, int high)
 {
@@ -12,11 +14,45 @@ void ArrayQuickSort(Object* arr[], int low, int high)
         {
             ArrayQuickSort(arr, low, pivotPos - 1);
         }
-        
+
         if (pivotPos + 1 < high)
         {
             ArrayQuickSort(arr, pivotPos + 1, high);
         }
+    }
+}
+
+void ArrayInsertSort(Object* arr[], int len)
+{
+    // 10	30	50	70	90	100	110	91	92
+    for (int i = 1; i < len; i++) {
+        int j = i - 1;
+        Object* curObj = arr[i];
+        while (ObjectIntValue(arr[j]) > ObjectIntValue(curObj) && j >= 0) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[++j] = curObj;
+    }
+}
+
+void ArraySelectSort(Object* arr[], int len)
+{
+    // 10	30	50	70	90	100	110	91	92
+    for (int i = 0; i < len; i++) {
+        Object* minObj = arr[i];
+        int minIndex = i;
+        for (int j = i + 1; j < len; j++)
+        {
+            if (ObjectIntValue(arr[j]) < ObjectIntValue(minObj))
+            {
+                minObj = arr[j];
+                minIndex = j;
+            }
+        }
+        Object* tmp = arr[i];
+        arr[i] = minObj;
+        arr[minIndex] = tmp;
     }
 }
 
@@ -97,3 +133,47 @@ int ArrayPartition(Object* arr[], int low, int high)
     arr[i] = pivotObj;
     return i;
 }
+
+void MaxHeapify(int arr[], int i, int heapSize)
+{
+    int left = LEFT(i);
+    int right = RIGHT(i);
+    int largest = i;
+    if (left < heapSize && arr[left] > arr[largest])
+    {
+        largest = left;
+    }
+
+    if (right < heapSize && arr[right] > arr[largest])
+    {
+        largest = right;
+    }
+
+    if (largest != i)
+    {
+        Swap(arr, i, largest);
+    }
+}
+
+void BuildMaxHeap(int arr[], int heapSize)
+{
+    for (int i = heapSize / 2 - 1; i >= 0; i--)
+    {
+        MaxHeapify(arr, i, heapSize);
+    }
+}
+
+void HeapSort(int arr[], int len)
+{
+    BuildMaxHeap(arr, len);
+
+    int heapSize = len;
+
+    for (int i = len - 1; i > 0; i--)
+    {
+        Swap(arr, i, 0);
+        heapSize -= 1;
+        BuildMaxHeap(arr, heapSize);
+    }
+}
+

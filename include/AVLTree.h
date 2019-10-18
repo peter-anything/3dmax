@@ -23,4 +23,4 @@ AVLTree* CreateAVLTree();
 AVLTreeNode* Insert(AVLTreeNode* root, void* data, int (*compare)(void *data1, void* data2));
 
 List* LevelOrderTraverse(AVLTreeNode* root);
-#endif // !_SEARCHTREE_H_
+#endif
