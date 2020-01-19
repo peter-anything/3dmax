@@ -1,3 +1,7 @@
 /**/.vs
 /**/Debug
 *.user
+*.exe
+*.idea
+*.vscode
+*cmake-build-debug

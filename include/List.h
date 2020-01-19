@@ -1,12 +1,14 @@
 #ifndef __LIST_H__
 #define __LIST_H__
 
+#include <stdbool.h>
+
 typedef struct ListNode {
     struct ListNode* prev;
     struct ListNode* next;
     void* value;
     int testValue;
-} ListNode1;
+} ListNode;
 
 typedef struct List {
     ListNode* head;

@@ -21,7 +21,7 @@ Queue* QueueCreate()
 void QueueDestroy(Queue* q)
 {
     ListDestroy(q->list);
-    delete q;
+    free(q);
 }
 
 void QueueClear(Queue* q)

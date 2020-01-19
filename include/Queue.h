@@ -17,4 +17,4 @@ bool QueueIsEmpty(Queue* q);
 int QueueLength(Queue* q);
 bool QueueEn(Queue* q, void * data);
 void* QueueDe(Queue* q);
-#endif // !QUEUEARRAY_H
+#endif

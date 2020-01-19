@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <malloc.h>
 
-Stack* CreateStack()
+Stack* StackCreate()
 {
     struct Stack* sList = (Stack*)malloc(sizeof(Stack));
     if (sList == NULL)
@@ -12,7 +12,8 @@ Stack* CreateStack()
         return NULL;
     }
 
-    sList->base = (StackElementType *)malloc(sizeof(StackElementType) * STACK_MAX_SIZE);
+    Object* obj;
+    sList->base = (Object**)malloc(sizeof(obj) * STACK_MAX_SIZE);
     sList->maxSize = STACK_MAX_SIZE;
     sList->size = 0;
     sList->top = sList->bottom = 0;
@@ -21,7 +22,7 @@ Stack* CreateStack()
 
 }
 
-void PushStack(Stack* stack, StackElementType data)
+void PushStack(Stack* stack, Object* data)
 {
     stack->base[stack->top++] = data;
     stack->size++;
@@ -39,21 +40,21 @@ bool IsFullStack(Stack* stack)
     return stack->size == stack->maxSize;
 }
 
-StackElementType GetTopStack(Stack* stack)
+Object* GetTopStack(Stack* stack)
 {
     return stack->base[stack->top];
 }
 
-void PopStack(Stack* stack, StackElementType* data)
+void PopStack(Stack* stack, Object* data)
 {
     if (IsEmptyStack(stack))
     {
         printf("Empty Stack");
         return;
     }
-    StackElementType top = stack->base[stack->top - 1];
+    Object* top = stack->base[stack->top - 1];
     stack->top--;
     stack->size--;
 
-    *data = top;
+    *data = *top;
 }
